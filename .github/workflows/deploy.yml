@@ -31,25 +31,26 @@ jobs:
       - name: Install Bun
         run: |
           curl -fsSL https://bun.sh/install | bash
-          echo 'export PATH="$HOME/.bun/bin:$PATH"' >> $GITHUB_ENV
+          # Add Bun to PATH for all future steps
+          echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
-      # 3️⃣ Install dependencies with Bun
+      # 3️⃣ Install dependencies
       - name: Install dependencies
         run: bun install
 
-      # 4️⃣ Build project with Bun
-      - name: Build
+      # 4️⃣ Build project
+      - name: Build project
         run: bunx vite build
 
       # 5️⃣ Configure GitHub Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      # 6️⃣ Upload build folder
+      # 6️⃣ Upload build artifact
       - name: Upload build artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./dist # make sure your Vite build output is ./dist
+          path: ./dist  # make sure this matches your Vite build output
 
       # 7️⃣ Deploy to GitHub Pages
       - name: Deploy
