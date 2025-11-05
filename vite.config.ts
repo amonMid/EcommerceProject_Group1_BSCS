@@ -5,6 +5,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+    base: "/EcommerceProject_Group1_BSCS/",
     plugins: [react(), tailwindcss()],
     resolve: {
         alias: {
